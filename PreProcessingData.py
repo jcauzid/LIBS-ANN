@@ -24,7 +24,7 @@ Elemnts = ['Si', 'Al', 'K', 'Ca', 'Fe', 'Mg', 'Mn', 'CaF', 'S', 'Ti',
 scaler = MinMaxScaler()
 DF = pd.DataFrame()
 for i in range(len(Ninerals)):
-    directory = os.getcwd() + os.path.sep + "DATA3"  + os.path.sep + "{}.xlsx".format(Ninerals[i])
+    directory = os.getcwd() + os.path.sep + "DATA"  + os.path.sep + "{}.xlsx".format(Ninerals[i])
     df = pd.read_excel(directory)
     df_data = df[df.columns[1:]]
     df_data = df_data.fillna(0) 
@@ -32,18 +32,18 @@ for i in range(len(Ninerals)):
     DF = DF.append(df_data)
 
 ### Validation set :
-df_ = pd.read_excel(os.getcwd() + os.path.sep + "DATA3"  + os.path.sep + "Dataset4_All_RefMinerals_Insitudata.xlsx")
+df_ = pd.read_excel(os.getcwd() + os.path.sep + "DATA"  + os.path.sep + "Dataset4_All_RefMinerals_Insitudata.xlsx")
 df_ = df_.iloc[6224::]
 df_ = df_[Elemnts]
 df_ = df_.fillna(0) 
 df_["Target"] =  [1000] *len(df_)
 """ Saving the validation data set"""
-df_.to_csv(os.getcwd() + os.path.sep + "DATA3"  + os.path.sep +"Dataset_validation_ref.csv", index = None)
+df_.to_csv(os.getcwd() + os.path.sep + "DATA"  + os.path.sep +"Dataset_validation_ref.csv", index = None)
 ###### Processing : 
 """ Mixing the training data set"""
 DF=DF.sample(frac=1).reset_index(drop=True)
 """ Reading the validation data set"""
-df_Validation = pd.read_csv(os.getcwd() + os.path.sep + "DATA3"  + os.path.sep +"Dataset_validation_ref.csv")
+df_Validation = pd.read_csv(os.getcwd() + os.path.sep + "DATA"  + os.path.sep +"Dataset_validation_ref.csv")
 DF = DF.append(df_Validation)
 DF[DF < 0] = 0
 """ Scaling all the data set"""
