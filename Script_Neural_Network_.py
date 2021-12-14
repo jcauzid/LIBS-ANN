@@ -80,8 +80,6 @@ def ProcessInput(k):
     return r 
 
 
-#for k in range(len(DF_Validation)):
-#   ProcessInput(k)
 from multiprocessing import Pool
 pool = multiprocessing.Pool(processes=4)
 results = pool.map(ProcessInput, range(len(DF_Validation)) )
